@@ -1,0 +1,159 @@
+<!--
+Editable Portfolio Website with Styling and Project Upload Feature
+File: index.html
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title contenteditable="true">Your Name — Portfolio</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#94a3b8; --glass: rgba(255,255,255,0.04); --maxw:1100px; --radius:12px;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:var(--font-sans); background:linear-gradient(180deg,var(--bg), #071124 140%); color:#e6eef8; line-height:1.5; padding:32px 16px;}
+    .wrap{max-width:var(--maxw); margin:auto}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent), #06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+    nav a:hover{color:#fff}
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-bottom:42px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));padding:28px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    h1{font-size:clamp(26px,3.8vw,40px);margin:0 0 10px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .btn{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600}
+    .btn.alt{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .avatar{width:100%;height:260px;border-radius:10px;background-size:cover;background-position:center}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:var(--glass);padding:6px 10px;border-radius:8px;color:var(--muted);font-size:13px}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:12px}
+    .project{padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03))}
+    footer{text-align:center;color:var(--muted);padding:18px 0;margin-top:28px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:inherit}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" contenteditable="true">YS</div>
+        <div>
+          <div style="font-weight:700" contenteditable="true">Your Name</div>
+          <div style="font-size:13px;color:var(--muted)" contenteditable="true">Web Developer • Designer</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card">
+          <h1>Hi — I'm <span style="color:var(--accent)" contenteditable="true">Your Name</span>.</h1>
+          <p class="lead" contenteditable="true">I build clean, accessible websites and small web apps.</p>
+          <div class="cta">
+            <a class="btn" href="#contact">Hire me</a>
+            <a class="btn alt" href="#projects">See projects</a>
+          </div>
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:18px 0">
+          <h4 style="margin:0 0 8px">Core skills</h4>
+          <div class="skills" contenteditable="true">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+          </div>
+        </div>
+        <aside class="profile card">
+          <input type="file" id="avatarUpload" accept="image/*" style="margin-bottom:10px">
+          <div class="avatar" id="avatarPreview" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800');"></div>
+          <div class="meta">
+            <div>
+              <div style="font-weight:700" contenteditable="true">Based in India</div>
+              <div style="font-size:13px;color:var(--muted)" contenteditable="true">Open to freelance & remote work</div>
+            </div>
+            <div style="text-align:right;color:var(--muted);font-size:13px" contenteditable="true">Available</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" class="card">
+        <h2 style="margin-top:0">About me</h2>
+        <p style="color:var(--muted)" contenteditable="true">Third-year Computer Science student building full-stack projects.</p>
+      </section>
+
+      <section id="projects">
+        <h2>Selected projects</h2>
+        <input type="file" id="projectUpload" accept="image/*">
+        <button class="btn" type="button" onclick="addProject()">Add Project</button>
+        <div class="projects" id="projectList">
+          <div class="project card" contenteditable="true">
+            <h3>Farmer Market</h3>
+            <p>A platform connecting farmers directly with buyers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="card">
+        <h2>Contact</h2>
+        <form id="contactForm" onsubmit="return handleSubmit(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input id="name" placeholder="Your name" required>
+            <input id="email" placeholder="Email" type="email" required>
+          </div>
+          <textarea id="message" placeholder="Message" required></textarea>
+          <div style="margin-top:12px">
+            <button class="btn" type="submit">Send message</button>
+          </div>
+          <div id="formStatus" style="margin-top:12px;color:var(--muted)"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div>Made with care • © <span id="year"></span> <span contenteditable="true">Your Name</span></div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('avatarUpload').addEventListener('change', function(e){
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = function(evt){
+          document.getElementById('avatarPreview').style.backgroundImage = `url('${evt.target.result}')`;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function addProject(){
+      const projectContainer = document.getElementById('projectList');
+      const newProject = document.createElement('div');
+      newProject.className = 'project card';
+      newProject.contentEditable = true;
+      newProject.innerHTML = '<h3>New Project</h3><p>Project description here.</p>';
+      projectContainer.appendChild(newProject);
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      document.getElementById('formStatus').textContent = `Thanks ${name}! Your message has been sent.`;
+      setTimeout(()=>{ document.getElementById('contactForm').reset(); }, 1500);
+      return false;
+    }
+  </script>
+</body>
+</html>
